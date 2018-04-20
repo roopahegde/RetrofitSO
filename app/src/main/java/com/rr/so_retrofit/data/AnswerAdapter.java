@@ -32,8 +32,6 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
         public void onClick(View view){
             Item item = mItems.get(getAdapterPosition());
             itemclickListener.onPostClick(item.getAnswerId());
-
-            //TODO : What happens if I do not call notifyDataSetChanged();
         }
 
     }
@@ -49,7 +47,10 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         View view = inflater.inflate(android.R.layout.simple_list_item_1, parent,
-                false);// TODO : What happens if I put true here
+                false);
+        // What happens if attachToRoot is true? -
+        // https://www.bignerdranch.com/blog/understanding-androids-layoutinflater-inflate/
+
         ViewHolder vh = new ViewHolder(view, mitemclickListener);
         return vh;
     }
@@ -58,8 +59,6 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item item = mItems.get(position);
         holder.textview.setText(item.getOwner().getDisplayName()) ;
-        /*TODO : the text for the text view is only set here and on in oncreateviewholder
-        isn't it necessary to set the text in oncreateviewholder too*/
     }
 
     @Override
